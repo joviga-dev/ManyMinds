@@ -1,0 +1,6 @@
+@ManyMinds_HostAddress = http://localhost:5022
+
+GET {{ManyMinds_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
