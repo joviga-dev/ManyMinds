@@ -2,6 +2,7 @@
 using ManyMinds.Controllers;
 using ManyMinds.Data;
 using ManyMinds.Models;
+using ManyMindsApi.Data.Dto.Fornecedor;
 using ManyMindsApi.Data.Dto.PedidoCompra;
 using ManyMindsApi.Data.Dto.Produto;
 using ManyMindsApi.Models;
@@ -107,7 +108,7 @@ public class PedidoCompraController : ControllerBase
     [HttpDelete("{id}/remover")]
     public IActionResult RemovePedidoCompra(int id)
     {
-        var pedidoCompraParaRemover = BuscaPedidoCompra(id);
+        var pedidoCompraParaRemover = this.context.pedidosCompra.Include(pedido => pedido.Fornecedor).FirstOrDefault(pedido => pedido.Id == id);
 
         if (!pedidoCompraParaRemover.status) return BadRequest("Não é permitido remover um pedido de compra finalizado.");
 

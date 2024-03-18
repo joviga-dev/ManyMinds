@@ -16,7 +16,7 @@ namespace ManyMinds.Controllers;
 public class ProdutoController : ControllerBase
 {
     private readonly ManyMindsApiContext context;
-    private readonly IMapper mapper; 
+    private readonly IMapper mapper;
     private readonly ISystemLogService logService;
 
     public ProdutoController(ManyMindsApiContext context, IMapper mapper, ISystemLogService logService)
@@ -52,7 +52,11 @@ public class ProdutoController : ControllerBase
     public IActionResult AtualizaProduto(int codigo, [FromBody] AtualizarProdutoDto dto)
     {
         var produtoParaAtualizar = this.BuscaProduto(codigo);
-        
+
+        if (!produtoParaAtualizar.status)
+            return BadRequest("Não é permitido alterar itens inativados");
+
+
         this.mapper.Map(dto, produtoParaAtualizar);
         this.context.SaveChanges();
 
@@ -149,7 +153,7 @@ public class ProdutoController : ControllerBase
 
     private Produto BuscaProduto(int codigo)
     {
-        var produto= this.context.produtos
+        var produto = this.context.produtos
             .FirstOrDefault(produto => produto.codigo == codigo);
 
         if (produto == null)

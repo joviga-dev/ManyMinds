@@ -10,5 +10,8 @@ namespace ManyMindsApi.Models
         [Required(ErrorMessage = "O status é obrigatório")]
         public bool Status { get; set; }
 
+        public Fornecedor(bool Status) {
+            this.Status = Status;
+        }
     }
 }

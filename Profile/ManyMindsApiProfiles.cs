@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using ManyMinds.Models;
 using ManyMindsApi.Controllers;
+using ManyMindsApi.Data.Dto.Fornecedor;
 using ManyMindsApi.Data.Dto.Login;
 using ManyMindsApi.Data.Dto.PedidoCompra;
 using ManyMindsApi.Data.Dto.Produto;
+using ManyMindsApi.Data.Dto.SystemLog;
 using ManyMindsApi.Data.Dto.Usuario;
 using ManyMindsApi.Models;
 
@@ -42,6 +44,24 @@ namespace ManyMindsApi.Profiles
         {
             CreateMap<AdicionarUsuarioDto, Usuario>();
             CreateMap<LoginDto, Usuario>();
+        }
+    }
+
+    public class FornecedorProfile : Profile
+    {
+        public FornecedorProfile()
+        {
+            CreateMap<PesquisarFornecedorDto, Fornecedor>();
+            CreateMap<Fornecedor, PesquisarFornecedorDto>();
+        }
+    }
+
+    public class SystemLogProfile : Profile
+    {
+        public SystemLogProfile()
+        {
+            CreateMap<PesquisaSystemLogDto, SystemLog>();
+            CreateMap<SystemLog, PesquisaSystemLogDto>();
         }
     }
 }

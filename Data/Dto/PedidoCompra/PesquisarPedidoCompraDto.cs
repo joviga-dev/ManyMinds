@@ -12,6 +12,7 @@ namespace ManyMindsApi.Data.Dto.PedidoCompra
 
         public String Obs { get; set; }
 
+        public int Fornecedor { get; set; }
         public decimal ValorTotalPedido { 
             get {
                 return Itens.Sum(item => item.ValorTotal);
