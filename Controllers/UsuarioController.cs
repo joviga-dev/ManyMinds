@@ -53,7 +53,7 @@ namespace ManyMindsApi.Controllers
             return Ok("Usuario " + dto.Login + " criado com sucesso");
         }
 
-        [HttpGet("login")]
+        [HttpPost("login")]
         public IActionResult Login([FromBody] LoginDto dto)
         {
             var remoteIpAddress = HttpContext.Connection.RemoteIpAddress.ToString();
@@ -92,11 +92,11 @@ namespace ManyMindsApi.Controllers
                     usuario.Id,
                     DateTime.Now,
                     "Usuario " + usuario.Login + " Logado");
-                return Ok("Logado");
+                return Ok();
             }
         }
 
-        [HttpGet("{Login}")]
+        [HttpGet("/buscar/{Login}")]
         public IActionResult FindUsuarioByLogin(String Login)
         {
             var usuario = this.BuscaUsuario(Login);
